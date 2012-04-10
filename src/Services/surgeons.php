@@ -1,0 +1,80 @@
+<?php
+/**
+ * Surgeons API
+ */
+
+/**
+ * Create a new surgeon
+ *
+ * @param Request $req        	
+ * @param Response $res        	
+ * @param string $name
+ *        	Surgeon's name
+ * @param string $title
+ *        	Dr. or Prof.
+ * @return multitype:unknown
+ */
+function surgeons_create($req, $res, $name, $title) {
+	$title = getTitle ( $title );
+	$query = 'INSERT INTO surgeons (`name`, `title`) VALUES (\'' . $name . '\', \'' . $title . '\')';
+	$result = runQuery ( $query );
+	return array (
+			"id" => $result 
+	);
+}
+
+/**
+ * Edit surgeons details
+ *
+ * @param Request $req        	
+ * @param Response $res        	
+ * @param string $id
+ *        	surgeon id
+ */
+function surgeons_edit($req, $res, $id, $name, $title) {
+	$title = getTitle ( $title );
+	$query = 'UPDATE surgeons SET `name` = \'' . $name . '\', `title` = \'' . $title . '\' WHERE `surgeons`.`id` = ' . $id;
+	$result = runQuery ( $query );
+	return 'edited';
+}
+
+/**
+ * Removes the surgeons from the list
+ *
+ * @param Request $req        	
+ * @param Response $res        	
+ * @param string $id
+ *        	surgeon to remove
+ * @return string
+ */
+function surgeons_remove($req, $res, $id) {
+	$query = 'DELETE FROM surgeons WHERE `id` =' . $id;
+	$result = runQuery ( $query );
+	return 'removed';
+}
+
+/**
+ * List all surgeons
+ *
+ * @param Request $req        	
+ * @param Response $res        	
+ * @return array
+ */
+function surgeons_list($req, $res) {
+	$query = 'SELECT * from surgeons';
+	return runQuery ( $query );
+}
+
+/**
+ *
+ * @param
+ *        	title
+ */
+function getTitle($title) {
+	if ($title == 1 || $title == 'Prof.') {
+		$title = 'Prof.';
+	} else {
+		$title = 'Dr.';
+	}
+	return $title;
+}

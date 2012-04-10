@@ -27,13 +27,16 @@
  * - ZS_<PARAMNAME> - will contain value of parameter defined in deployment.xml, as specified by
  *   user during deployment.
  */  
+$appLocation = getenv('ZS_APPLICATION_BASE_DIR');
+$previousVersion = getenv('ZS_PREVIOUS_APP_VERSION');
+
+require_once 'exceptions.php';
 require_once 'db.php';
 require_once 'rewrite.php';
 
 // get application location
-$appLocation = getenv('ZS_APPLICATION_BASE_DIR');
 handleRewrite($appLocation);
 
-$query = file_get_contents ( 'create-schema.sql' );
+$query = file_get_contents ( dirname(__FILE__) . '/schema-1.0.sql' );
 runQuery($query);
 

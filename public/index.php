@@ -1,97 +1,36 @@
 <?php
+set_include_path ( get_include_path () . PATH_SEPARATOR . '../library' . PATH_SEPARATOR . '../src' );
 require_once 'Gateful/Main.php';
+require_once 'Services/all.php';
 
 $gateful->router ( array (
 		// users
-		array (
-				'/users/login',
-				'users_login' 
-		),
+		'/doc-reports/users/login' => 'users_login',
 		// sessions
-		array (
-				'/sessions/create',
-				'sessions_create' 
-		),
-		array (
-				'/sessions/edit',
-				'sessions_edit' 
-		),
-		array (
-				'/sessions/remove',
-				'sessions_remove' 
-		),
-		array (
-				'/sessions/list',
-				'sessions_list' 
-		),
+		'/doc-reports/sessions/create' => 'sessions_create',
+		'/doc-reports/sessions/edit' => 'sessions_edit',
+		'/doc-reports/sessions/remove' => 'sessions_remove',
+		'/doc-reports/sessions/list' => 'sessions_list',
 		// shifts
-		array (
-				'/shifts/create',
-				'shifts_create' 
-		),
-		array (
-				'/shifts/edit',
-				'shifts_edit' 
-		),
-		array (
-				'/shifts/remove',
-				'shifts_remove' 
-		),
-		array (
-				'/shifts/list',
-				'shifts_list' 
-		),
+		'/doc-reports/shifts/create' => 'shifts_create',
+		'/doc-reports/shifts/edit' => 'shifts_edit',
+		'/doc-reports/shifts/remove' => 'shifts_remove',
+		'/doc-reports/shifts/list' => 'shifts_list',
 		// surgeries
-		array (
-				'/surgeries/create',
-				'surgeries_create' 
-		),
-		array (
-				'/surgeries/edit',
-				'surgeries_edit' 
-		),
-		array (
-				'/surgeries/remove',
-				'surgeries_remove' 
-		),
-		array (
-				'/surgeries/list',
-				'surgeries_list' 
-		), 
+		'/doc-reports/surgeries/create' => 'surgeries_create',
+		'/doc-reports/surgeries/edit' => 'surgeries_edit',
+		'/doc-reports/surgeries/remove' => 'surgeries_remove',
+		'/doc-reports/surgeries/list' => 'surgeries_list',
 		// doctors
-		array (
-				'/doctors/create',
-				'doctors_create' 
-		),
-		array (
-				'/doctors/edit',
-				'doctors_edit' 
-		),
-		array (
-				'/doctors/remove',
-				'doctors_remove' 
-		),
-		array (
-				'/doctors/list',
-				'doctors_list' 
-		), 
+		'/doc-reports/surgeons/create' => 'surgeons_create',
+		'/doc-reports/surgeons/edit' => 'surgeons_edit',
+		'/doc-reports/surgeons/remove' => 'surgeons_remove',
+		'/doc-reports/surgeons/list' => 'surgeons_list',
 		// operations
-		array (
-				'/operations/create',
-				'operations_create' 
-		),
-		array (
-				'/operations/edit',
-				'operations_edit' 
-		),
-		array (
-				'/operations/remove',
-				'operations_remove' 
-		),
-		array (
-				'/operations/list',
-				'operations_list' 
-		) 
+		'/doc-reports/operations/create' => 'operations_create',
+		'/doc-reports/operations/edit' => 'operations_edit',
+		'/doc-reports/operations/remove' => 'operations_remove',
+		'/doc-reports/operations/list' => 'operations_list' 
 ) );
 
 $gateful->send ();

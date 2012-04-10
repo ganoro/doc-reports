@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE  `users` (
 	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT  'id primary',
 	`name` VARCHAR( 255 ) NOT NULL COMMENT  'user name',
@@ -6,17 +6,17 @@ CREATE TABLE  `users` (
 	`last_login` DATE NOT NULL COMMENT  'last time log in'
 ) ENGINE = INNODB;
 
-DROP TABLE IF EXISTS doctors;
-CREATE TABLE  `doctors` (
-	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT  'id',
+DROP TABLE IF EXISTS `surgeons`;
+CREATE TABLE  `surgeons` (
+	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT  'id primary',
 	`name` VARCHAR( 50 ) NOT NULL COMMENT  'doc name ',
-	`title` SET(  'Dr.',  'Prof.' ) NOT NULL COMMENT  'title'
+	`title` SET(  'Dr.',  'Prof.' ) NOT NULL COMMENT  'title'	
 ) ENGINE = INNODB;
 
-DROP TABLE IF EXISTS operations;
+DROP TABLE IF EXISTS `operations`;
 CREATE TABLE  `operations` (
 	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT  'id',
-	`name` VARCHAR( 50 ) NOT NULL COMMENT  'doc name ',
+	`name` VARCHAR( 50 ) NOT NULL COMMENT  'doc name '
 ) ENGINE = INNODB;
 
 DROP TABLE IF EXISTS sessions;
@@ -33,8 +33,8 @@ CREATE TABLE  `shifts` (
 	`comments` VARCHAR( 300 ) NULL COMMENT  'comments'
 ) ENGINE = INNODB;
 
-DROP TABLE IF EXISTS sessions;
-CREATE TABLE  `sessions` (
+DROP TABLE IF EXISTS surgeries;
+CREATE TABLE  `surgeries` (
 	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT  'id',
 	`date` DATE NOT NULL COMMENT  'date',
 	`op_type` INT NOT NULL COMMENT  'operation type ',
