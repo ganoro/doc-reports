@@ -14,9 +14,9 @@
  *        	Dr. or Prof.
  * @return multitype:unknown
  */
-function surgeons_create($req, $res, $name, $title) {
+function surgeons_create($req, $res, $name, $title, $uid) {
 	$title = getTitle ( $title );
-	$query = 'INSERT INTO surgeons (`name`, `title`) VALUES (\'' . $name . '\', \'' . $title . '\')';
+	$query = 'INSERT INTO surgeons (`name`, `title`, `uid`) VALUES (\'' . $name . '\', \'' . $title . '\', \'' . $uid . '\')';
 	$result = runQuery ( $query );
 	return array (
 			"id" => $result 
@@ -35,7 +35,9 @@ function surgeons_edit($req, $res, $id, $name, $title) {
 	$title = getTitle ( $title );
 	$query = 'UPDATE surgeons SET `name` = \'' . $name . '\', `title` = \'' . $title . '\' WHERE `surgeons`.`id` = ' . $id;
 	$result = runQuery ( $query );
-	return 'edited';
+	return array (
+			"id" => $id 
+	);
 }
 
 /**
@@ -60,8 +62,8 @@ function surgeons_remove($req, $res, $id) {
  * @param Response $res        	
  * @return array
  */
-function surgeons_list($req, $res) {
-	$query = 'SELECT * from surgeons';
+function surgeons_list($req, $res, $uid) {
+	$query = 'SELECT * from surgeons WHERE `uid` =' . $uid;
 	return runQuery ( $query );
 }
 
@@ -78,3 +80,4 @@ function getTitle($title) {
 	}
 	return $title;
 }
+

@@ -12,11 +12,11 @@
  *        	operation's name
  * @return array - id of the newly created record
  */
-function operations_create($req, $res, $name) {
-	$query = 'INSERT INTO operations (`name`) VALUES (\'' . $name . '\')';
+function operations_create($req, $res, $name, $uid) {
+	$query = 'INSERT INTO operations (`name`, `uid`) VALUES (\'' . $name . '\', \'' . $uid . '\')';
 	$result = runQuery ( $query );
 	return array (
-			"id" => $result 
+			'id' => $result 
 	);
 }
 
@@ -31,8 +31,9 @@ function operations_create($req, $res, $name) {
 function operations_edit($req, $res, $id, $name) {
 	$query = 'UPDATE operations SET `name` = \'' . $name . '\' WHERE `operations`.`id` = ' . $id;
 	$result = runQuery ( $query );
-	return 'edited';
-}
+	return array (
+			'id' => $id 
+	);}
 
 /**
  * Removes the operations from the list
@@ -56,7 +57,7 @@ function operations_remove($req, $res, $id) {
  * @param Response $res        	
  * @return array
  */
-function operations_list($req, $res) {
-	$query = 'SELECT * from operations';
+function operations_list($req, $res, $uid) {
+	$query = 'SELECT * from operations WHERE `uid` = ' . $uid;
 	return runQuery ( $query );
 }
