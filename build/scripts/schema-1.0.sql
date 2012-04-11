@@ -47,7 +47,7 @@ CREATE TABLE  `surgeries` (
 	`op_type` INT NOT NULL COMMENT  'operation type ',
 	`first` INT NOT NULL COMMENT  'first surgery',
 	`second` INT NULL COMMENT  'second surgery ',
-	`thrid` VARCHAR( 300 ) NULL COMMENT  'third surgery',
+	`third` VARCHAR( 300 ) NULL COMMENT  'third surgery',
 	`patient_id` VARCHAR( 10 ) NOT NULL COMMENT  'id of patient ',
 	`patient_name` VARCHAR( 100 ) NOT NULL COMMENT  'name of patient ',
 	`comments` VARCHAR( 300 ) NULL COMMENT  'comments',

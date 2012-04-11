@@ -6,8 +6,8 @@
 /**
  * Create a new session
  *
- * @param Request $req
- * @param Response $res
+ * @param Request $req        	
+ * @param Response $res        	
  * @param string $name
  *        	session's name
  * @param string $title
@@ -19,30 +19,32 @@ function sessions_create($req, $res, $date, $comments, $uid) {
 	$query = 'INSERT INTO sessions (`report_date`, `comments`, `uid`) VALUES (\'' . $date . '\', \'' . $comments . '\', \'' . $uid . '\')';
 	$result = runQuery ( $query );
 	return array (
-			"id" => $result
+			"id" => $result 
 	);
 }
 
 /**
  * Edit sessions details
  *
- * @param Request $req
- * @param Response $res
+ * @param Request $req        	
+ * @param Response $res        	
  * @param string $id
  *        	session id
  */
 function sessions_edit($req, $res, $id, $date, $comments) {
 	$date = formatDate ( $date );
-	$query = 'UPDATE sessions SET `date` = \'' . $date . '\', `comments` = \'' . $comments . '\' WHERE `sessions`.`id` = ' . $id;
+	$query = 'UPDATE sessions SET `report_date` = \'' . $date . '\', `comments` = \'' . $comments . '\' WHERE `sessions`.`id` = ' . $id;
 	$result = runQuery ( $query );
-	return 'edited';
+	return array (
+			"id" => $id 
+	);
 }
 
 /**
  * Removes the sessions from the list
  *
- * @param Request $req
- * @param Response $res
+ * @param Request $req        	
+ * @param Response $res        	
  * @param string $id
  *        	session to remove
  * @return string
@@ -56,8 +58,8 @@ function sessions_remove($req, $res, $id) {
 /**
  * List all sessions
  *
- * @param Request $req
- * @param Response $res
+ * @param Request $req        	
+ * @param Response $res        	
  * @return array
  */
 function sessions_list($req, $res, $uid) {

@@ -5,7 +5,7 @@
 
 /**
  * Create a new shift
- * 
+ *
  * @param Request $req        	
  * @param Response $res        	
  * @param string $date        	
@@ -32,9 +32,11 @@ function shifts_create($req, $res, $date, $comments, $uid) {
  */
 function shifts_edit($req, $res, $id, $date, $comments) {
 	$date = formatDate ( $date );
-	$query = 'UPDATE shifts SET `date` = \'' . $date . '\', `comments` = \'' . $comments . '\' WHERE `shifts`.`id` = ' . $id;
+	$query = 'UPDATE shifts SET `report_date` = \'' . $date . '\', `comments` = \'' . $comments . '\' WHERE `shifts`.`id` = ' . $id;
 	$result = runQuery ( $query );
-	return 'edited';
+	return array (
+			'id' => $id 
+	);
 }
 
 /**
