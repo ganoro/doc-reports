@@ -23,14 +23,14 @@ function shifts_create($req, $res, $date, $comments, $uid) {
 }
 
 /**
- * Edit shifts details
+ * update shifts details
  *
  * @param Request $req        	
  * @param Response $res        	
  * @param string $id
  *        	shift id
  */
-function shifts_edit($req, $res, $id, $date, $comments) {
+function shifts_update($req, $res, $id, $date, $comments) {
 	$date = formatDate ( $date );
 	$query = 'UPDATE shifts SET `report_date` = \'' . $date . '\', `comments` = \'' . $comments . '\' WHERE `shifts`.`id` = ' . $id;
 	$result = runQuery ( $query );
@@ -48,7 +48,7 @@ function shifts_edit($req, $res, $id, $date, $comments) {
  *        	shift to remove
  * @return string
  */
-function shifts_remove($req, $res, $id) {
+function shifts_delete($req, $res, $id) {
 	$query = 'DELETE FROM shifts WHERE `id` =' . $id;
 	$result = runQuery ( $query );
 	return 'removed';
@@ -61,7 +61,7 @@ function shifts_remove($req, $res, $id) {
  * @param Response $res        	
  * @return array
  */
-function shifts_list($req, $res, $uid) {
+function shifts_read($req, $res, $uid) {
 	$query = 'SELECT * from shifts WHERE `uid` =' . $uid;
 	return runQuery ( $query );
 }

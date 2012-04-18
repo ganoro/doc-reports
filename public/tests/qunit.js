@@ -1658,11 +1658,11 @@ QUnit.diff = (function() {
 		return str;
 	};
 }());
-
+ 
 // for CommonJS enviroments, export everything
-if ( typeof exports !== "undefined" || typeof require !== "undefined" ) {
-	extend(exports, QUnit);
-}
+//if ( typeof exports !== "undefined" || typeof require !== "undefined" ) {
+//	extend(exports, QUnit);
+//}
 
 // get at whatever the global object is, like window in browsers
 }( (function() {return this;}.call()) ));

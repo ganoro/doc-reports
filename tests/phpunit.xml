@@ -1,0 +1,12 @@
+<phpunit backupGlobals="false" backupStaticAttributes="true"
+	colors="true" convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true" convertWarningsToExceptions="true"
+	processIsolation="true" stopOnFailure="false" syntaxCheck="false"
+	testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader"
+	bootstrap="./bootstrap.php">
+
+	<testsuite name="Doc Reports Test Suite">
+		<directory>./Services</directory>
+	</testsuite>
+	
+</phpunit>

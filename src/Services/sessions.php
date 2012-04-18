@@ -24,14 +24,14 @@ function sessions_create($req, $res, $date, $comments, $uid) {
 }
 
 /**
- * Edit sessions details
+ * update sessions details
  *
  * @param Request $req        	
  * @param Response $res        	
  * @param string $id
  *        	session id
  */
-function sessions_edit($req, $res, $id, $date, $comments) {
+function sessions_update($req, $res, $id, $date, $comments) {
 	$date = formatDate ( $date );
 	$query = 'UPDATE sessions SET `report_date` = \'' . $date . '\', `comments` = \'' . $comments . '\' WHERE `sessions`.`id` = ' . $id;
 	$result = runQuery ( $query );
@@ -49,7 +49,7 @@ function sessions_edit($req, $res, $id, $date, $comments) {
  *        	session to remove
  * @return string
  */
-function sessions_remove($req, $res, $id) {
+function sessions_delete($req, $res, $id) {
 	$query = 'DELETE FROM sessions WHERE `id` =' . $id;
 	$result = runQuery ( $query );
 	return 'removed';
@@ -62,7 +62,7 @@ function sessions_remove($req, $res, $id) {
  * @param Response $res        	
  * @return array
  */
-function sessions_list($req, $res, $uid) {
+function sessions_read($req, $res, $uid) {
 	$query = 'SELECT * from sessions WHERE `uid` =' . $uid;
 	return runQuery ( $query );
 }

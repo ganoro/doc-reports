@@ -1,4 +1,5 @@
 <?php
+
 /*******************************************************************************
  * Copyright (c) 2012, 2012 Zend Technologies.
  * All rights reserved. This program and the accompanying materials
@@ -9,6 +10,7 @@
  *******************************************************************************/
 namespace Gateful\Instruction;
 
+use Zend\Stdlib\CallbackHandler;
 use Zend\Http\PhpEnvironment\Response;
 use Zend\Http\PhpEnvironment\Request;
 use Gateful\Service\ServiceInstruction;
@@ -18,72 +20,118 @@ use Gateful\Service\ServiceEvent;
  * Dispatch request
  */
 class Dispatch extends ServiceInstruction {
-
+	const ERROR_SERVICE_NOT_FOUND = "Service or callable not found";
+	
 	/**
 	 * constructs a new dispatch service instruction
 	 *
 	 * @param array $metadata        	
 	 */
 	public function __construct() {
-		parent::__construct('dispatch');
+		parent::__construct ( 'dispatch' );
 	}
-
-	protected function internalRun(Request $req, Response $res,
-			ServiceEvent $event) {
-		$routeMatch = $event->getRouteMatch();
+	protected function internalRun(Request $req, Response $res, ServiceEvent $event) {
+		$routeMatch = $event->getRouteMatch ();
+		
 		if ($routeMatch != null) {
-			$serviceName = $routeMatch->getParam('service', 'not-found');
-			$method = $routeMatch->getParam('method', 'not-found');
-			$params = $routeMatch->getParams();
-
-			if ($serviceName != 'not-found' && $method != 'not-found') {
-				$service = $event->getLocator()->get($serviceName);
-				$methodParams = $this
-						->getServiceMethodParams($serviceName, $method);
-				$target = array($service, $method);
+			
+			// find callable
+			$url = $routeMatch->getParam ( 'url', 'not-found' );
+			$callable = $routeMatch->getParam ( 'callable', 'not-found' );
+			if ($url != 'not-found' && $callable != 'not-found') {
+				$target = new CallbackHandler ( $callable );
 			} else {
-				$target = $routeMatch->getParam('call', 'not-found');
-				$methodParams = $this->getFunctionParams($target);
+				// TODO Error
+				$event->setError ( self::ERROR_SERVICE_NOT_FOUND );
 			}
-
-			$data = array('req' => $req, 'res' => $res);
-			foreach ($methodParams as $param) {
-				$name = $param->getName();
-				if ($param->isOptional()) {
-					$data[$name] = !empty($params[$name]) ? $params[$name]
-							: $param->getDefaultValue();
-				} else if (!empty($params[$name])) {
-					$data[$name] = $params[$name];
+			
+			// bind request parameters to callback
+			$data = array (
+					'req' => $req,
+					'res' => $res 
+			);
+			$requestParameters = $this->getRequestParameters ( $req );
+			$params = $routeMatch->getParams ();
+			$methodParams = $this->getMethodParams ( $target->getCallback () );
+			if ($methodParams == null) {
+				// TODO Error
+				$event->setError ( self::ERROR_SERVICE_NOT_FOUND );
+			}
+			foreach ( $methodParams as $param ) {
+				$name = $param->getName ();
+				if ($param->isOptional ()) {
+					$data [$name] = ! empty ( $params [$name] ) ? $params [$name] : $param->getDefaultValue ();
+				} else if (! empty ( $params [$name] )) {
+					$data [$name] = $params [$name];
 				} else {
-					if ($req->getMethod() == "GET") {
-						$p = $req->query()->get($name, null);
-						if (isset($p)) {
-							$data[$name] = $p;
-						}
-					} else if ($req->getMethod() == "POST") {
-						$p = $req->post()->get($name, null);
-						if (isset($p)) {
-							$data[$name] = $p;
-						}
+					$p = $requestParameters [$name];
+					if (isset ( $p )) {
+						$data [$name] = $p;
 					}
 				}
 			}
-			$event->setParam('result', call_user_func_array($target, $data));
+			
+			// dispatch 
+			$event->setParam ( 'result', call_user_func_array ( $target, $data ) );
 		}
 	}
-
+	
+	/**
+	 * Resolve the request parameters according to its content type
+	 *
+	 * @param
+	 *        	$req
+	 * @return array
+	 */
+	private function getRequestParameters($req) {
+		$contentHeader = $req->headers ()->get ( "content-type" );
+		$requestParameters = array ();
+		if (! empty ( $contentHeader ) && $contentHeader->getFieldValue () == "application/json") {
+			$content = file_get_contents ( "php://input" );
+			if (! empty ( $content )) {
+				$decoded = json_decode ( $content );
+				$requestParameters = get_object_vars($decoded);
+			}
+			
+		} else {
+			if ($req->isGet ()) {
+				$requestParameters = $req->query ()->toArray ();
+			} else if ($req->isPost ()) {
+				$requestParameters = $req->post ()->toArray ();
+			}
+		}
+		return $requestParameters;
+	}
 	private function getServiceMethodParams($serviceName, $method) {
-		$classRef = new \ReflectionClass($serviceName);
-		$className = $classRef->getName();
-		$methodRef = $classRef->getMethod($method);
-		$paramsRef = $methodRef->getParameters();
+		$classRef = new \ReflectionClass ( $serviceName );
+		$className = $classRef->getName ();
+		$methodRef = $classRef->getMethod ( $method );
+		$paramsRef = $methodRef->getParameters ();
 		return $paramsRef;
 	}
-
+	private function getObjectMethodParams($object, $method) {
+		$classRef = new \ReflectionObject ( $object );
+		$methodRef = $classRef->getMethod ( $method );
+		$paramsRef = $methodRef->getParameters ();
+		return $paramsRef;
+	}
 	private function getFunctionParams($method) {
-		$methodRef = new \ReflectionFunction($method);
-		$paramsRef = $methodRef->getParameters();
+		$methodRef = new \ReflectionFunction ( $method );
+		$paramsRef = $methodRef->getParameters ();
 		return $paramsRef;
 	}
-
+	private function getMethodParams($callback) {
+		if (is_string ( $callback ) || $callback instanceof \Closure) {
+			return $this->getFunctionParams ( $callback );
+		} else if (is_array ( $callback ) && count ( $callback ) == 2) {
+			$dispatcher = $callback [0];
+			$dispatch = $callback [1];
+			if (is_object ( $dispatcher )) {
+				return $this->getObjectMethodParams ( $dispatcher, $dispatch );
+			} else if (is_string ( $dispatcher )) {
+				return $this->getServiceMethodParams ( $dispatcher, $dispatch );
+			}
+		}
+		return null;
+	}
 }

@@ -24,14 +24,14 @@ function surgeons_create($req, $res, $name, $title, $uid) {
 }
 
 /**
- * Edit surgeons details
+ * update surgeons details
  *
  * @param Request $req        	
  * @param Response $res        	
  * @param string $id
  *        	surgeon id
  */
-function surgeons_edit($req, $res, $id, $name, $title) {
+function surgeons_update($req, $res, $id, $name, $title) {
 	$title = getTitle ( $title );
 	$query = 'UPDATE surgeons SET `name` = \'' . $name . '\', `title` = \'' . $title . '\' WHERE `surgeons`.`id` = ' . $id;
 	$result = runQuery ( $query );
@@ -49,7 +49,7 @@ function surgeons_edit($req, $res, $id, $name, $title) {
  *        	surgeon to remove
  * @return string
  */
-function surgeons_remove($req, $res, $id) {
+function surgeons_delete($req, $res, $id) {
 	$query = 'DELETE FROM surgeons WHERE `id` =' . $id;
 	$result = runQuery ( $query );
 	return 'removed';
@@ -62,7 +62,7 @@ function surgeons_remove($req, $res, $id) {
  * @param Response $res        	
  * @return array
  */
-function surgeons_list($req, $res, $uid) {
+function surgeons_read($req, $res, $uid) {
 	$query = 'SELECT * from surgeons WHERE `uid` =' . $uid;
 	return runQuery ( $query );
 }
