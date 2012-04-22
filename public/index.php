@@ -3,9 +3,39 @@ set_include_path ( get_include_path () . PATH_SEPARATOR . '../library' . PATH_SE
 require_once 'Gateful/Main.php';
 require_once 'Services/all.php';
 
+// bb style - operations
+$gateful->get ( '/doc-reports/operations', 'operations_read' );
+$gateful->get ( '/doc-reports/operations/:id', 'operations_read' );
+$gateful->post ( '/doc-reports/operations', 'operations_create' );
+$gateful->delete ( '/doc-reports/operations/:id', 'operations_delete' );
+$gateful->put ( '/doc-reports/operations/:id', 'operations_update' );
+
+// bb style - surgeons
+$gateful->get ( '/doc-reports/surgeons', 'surgeons_read' );
+$gateful->get ( '/doc-reports/surgeons/:id', 'surgeons_read' );
+$gateful->post ( '/doc-reports/surgeons', 'surgeons_create' );
+$gateful->delete ( '/doc-reports/surgeons/:id', 'surgeons_delete' );
+$gateful->put ( '/doc-reports/surgeons/:id', 'surgeons_update' );
+
+// bb style - shifts
+$gateful->get ( '/doc-reports/shifts', 'shifts_read' );
+$gateful->get ( '/doc-reports/shifts/:id', 'shifts_read' );
+$gateful->post ( '/doc-reports/shifts', 'shifts_create' );
+$gateful->delete ( '/doc-reports/shifts/:id', 'shifts_delete' );
+$gateful->put ( '/doc-reports/shifts/:id', 'shifts_update' );
+
+// bb style - sessions
+$gateful->get ( '/doc-reports/sessions', 'sessions_read' );
+$gateful->get ( '/doc-reports/sessions/:id', 'sessions_read' );
+$gateful->post ( '/doc-reports/sessions', 'sessions_create' );
+$gateful->delete ( '/doc-reports/sessions/:id', 'sessions_delete' );
+$gateful->put ( '/doc-reports/sessions/:id', 'sessions_update' );
+
+$gateful->send ();
+
+/*
 // users
 $gateful->get ( '/doc-reports/users/login', 'users_login' );
-
 // sessions
 $gateful->post ( '/doc-reports/sessions/create', 'sessions_create' );
 $gateful->post ( '/doc-reports/sessions/update', 'sessions_update' );
@@ -31,13 +61,4 @@ $gateful->post ( '/doc-reports/operations/create', 'operations_create' );
 $gateful->post ( '/doc-reports/operations/update', 'operations_update' );
 $gateful->post ( '/doc-reports/operations/delete', 'operations_delete' );
 $gateful->get ( '/doc-reports/operations/read', 'operations_read' );
-
-// backbone - style
-$gateful->get ( '/doc-reports/operations', 'operations_read' );
-$gateful->get ( '/doc-reports/operations/:id', 'operations_read' );
-$gateful->post ( '/doc-reports/operations', 'operations_create' );
-$gateful->delete ( '/doc-reports/operations/:id', 'operations_delete' );
-$gateful->put ( '/doc-reports/operations/:id', 'operations_update' );
-
-$gateful->send ();
-
+*/

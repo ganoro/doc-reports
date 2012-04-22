@@ -4,12 +4,18 @@ require.config({
 		'mobile' : '../lib/mobile',
 		'underscore' : '../lib/underscore',
 		'backbone' : '../lib/backbone',
-		'swipeButton' : '../lib/jquery.swipeButton.min-1.2'
+		'moment' : '../lib/moment',
+		'swipeButton' : '../lib/jquery.swipeButton-1.2'
 	}
 
 });
 
-require([ 'jquery', 'mobile', 'app' ], function($, mobile, AppView) {
-	$.mobile.hashListeningEnabled = false; 
-	var app_view = new AppView;
+require([ 'jquery', 'mobile', 'app.operations', 'app.surgeons',
+		'app.shifts.form', 'app.sessions.form' ], function($, mobile, AppOperationView,
+		AppSurgeonView, ShiftFormView, SessionFormView) {
+	$.mobile.hashListeningEnabled = false;
+	var opView = new AppOperationView;
+	var srView = new AppSurgeonView;
+	var sfFormView = new ShiftFormView;
+	var ssFormView = new SessionFormView;
 });

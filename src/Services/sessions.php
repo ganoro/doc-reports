@@ -62,7 +62,7 @@ function sessions_delete($req, $res, $id) {
  * @param Response $res        	
  * @return array
  */
-function sessions_read($req, $res, $uid) {
+function sessions_read($req, $res, $uid = 1) {
 	$query = 'SELECT * from sessions WHERE `uid` =' . $uid;
 	return runQuery ( $query );
 }

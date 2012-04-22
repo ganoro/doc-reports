@@ -1,11 +1,13 @@
 define([ 'jquery', 'underscore', 'backbone', 'operations/collection',
 		'operations/view' ], function($, _, Backbone, Operations,
 		OperationsView) { 
-	var AppView = Backbone.View.extend({
+	var AppOperationView = Backbone.View.extend({
 
 		// Instead of generating a new element, bind to the existing skeleton of
 		// the App already present in the HTML.
-		el : $("#page1"),
+		el : $("#page3"),
+		
+		lista: $("#operation-list"),
 
 		// Delegated events for creating new items, and clearing completed ones.
 		events : {
@@ -41,13 +43,22 @@ define([ 'jquery', 'underscore', 'backbone', 'operations/collection',
 				model : operation
 			});
 			var el = view.render().el;
-			this.$("#operation-list").append(el);
-			this.$("#operation-list").listview('refresh');
+			this._internalAddOne(el);
 		},
 
 		// Add all items in the **Operations** collection at once.
 		addAll : function() {
+			this.lista.empty();
 			Operations.each(this.addOne);
+		},
+		
+		_internalAddOne: function(el) {
+			this.lista.append(el);
+			if (this.lista.hasClass('ui-listview')) {
+				this.lista.listview('refresh');
+	        } else {
+	        	this.lista.trigger('create');
+	        }			
 		},
 
 		// Generate the attributes for a new Todo item.
@@ -83,5 +94,5 @@ define([ 'jquery', 'underscore', 'backbone', 'operations/collection',
 		},
 
 	});
-	return AppView;
+	return AppOperationView;
 });

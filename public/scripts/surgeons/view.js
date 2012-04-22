@@ -1,13 +1,12 @@
-define([ 'jquery', 'underscore', 'backbone', 'text!operations/template.html',
-		'order!swipeButton' ], function($, _, Backbone,
-		operationTemplate) {
-	var OperationView = Backbone.View.extend({
+define([ 'jquery', 'underscore', 'backbone', 'text!surgeons/template.html',
+		'order!swipeButton' ], function($, _, Backbone, surgeonTemplate) {
+	var SurgeonView = Backbone.View.extend({
 
 		// ... is a list tag.
 		tagName : "li",
 
 		// Cache the template function for a single item.
-		template : _.template(operationTemplate),
+		template : _.template(surgeonTemplate),
 
 		// The TodoView listens for changes to its model, re-rendering.
 		// Since
@@ -19,6 +18,7 @@ define([ 'jquery', 'underscore', 'backbone', 'text!operations/template.html',
 		initialize : function() {
 			_.bindAll(this, 'render', 'close', 'remove');
 			this.model.bind('change:name', this.render);
+			this.model.bind('change:title', this.render);
 			this.model.bind('destroy', this.remove);
 		},
 
@@ -38,12 +38,7 @@ define([ 'jquery', 'underscore', 'backbone', 'text!operations/template.html',
 					$(this).parents('li').slideUp();
 				}
 			});
-			this.input = this.$('#operation-input');
-			
-			this.$('#surgery-operation').append(new Option(this.model.name, this.model.id, true, true));
-
-			// $("#list option:selected").text();
-			
+			this.input = this.$('#surgeon-input');
 			return this;
 		},
 
@@ -67,5 +62,5 @@ define([ 'jquery', 'underscore', 'backbone', 'text!operations/template.html',
 		}
 
 	});
-	return OperationView;
+	return SurgeonView;
 });

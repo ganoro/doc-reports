@@ -61,7 +61,7 @@ function shifts_delete($req, $res, $id) {
  * @param Response $res        	
  * @return array
  */
-function shifts_read($req, $res, $uid) {
+function shifts_read($req, $res, $uid = 1) {
 	$query = 'SELECT * from shifts WHERE `uid` =' . $uid;
 	return runQuery ( $query );
 }

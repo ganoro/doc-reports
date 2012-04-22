@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>
+        </title>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+        <link rel="stylesheet" href="lib/jquery.swipeButton-1.2.css" />        
+		<script data-main="scripts/main" src="lib/require-jquery.js"></script>
+    </head>
+    <body>
+        <div data-role="page" id="page1">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    Reporting
+                </h3>
+            </div>
+            <div data-role="content">
+                <h3>
+                    What Will You Do Today?
+                </h3>
+                <div>
+                </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a data-role="button" data-transition="fade" href="#page2" data-icon="gear" data-iconpos="top">
+                            Surgeons
+                        </a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a data-role="button" data-transition="fade" href="#page3" data-icon="gear" data-iconpos="top">
+                            Operations
+                        </a>
+                    </div>
+                    <div class="ui-block-a">
+                        <a data-role="button" data-transition="fade" href="#page7" data-icon="grid" data-iconpos="top">
+                            Shift
+                        </a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a data-role="button" data-transition="fade" href="#page8" data-icon="refresh" data-iconpos="top">
+                            Session
+                        </a>
+                    </div>
+                    <div class="ui-block-a">
+                        <a data-role="button" data-transition="fade" href="#page9" data-icon="star" data-iconpos="top">
+                            Surgery
+                        </a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a data-role="button" data-transition="fade" href="#page6" data-icon="search" data-iconpos="top">
+                            Reports
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3>
+                    2012, All rights reserved.
+                </h3>
+            </div>
+        </div>
+        <div data-role="page" id="page2">
+            <div data-theme="a" data-role="header">
+                <a data-role="button" data-transition="fade" href="#page1" data-icon="back" data-iconpos="left">
+                    Back
+                </a>
+                <h3>
+                    Surgeons
+                </h3>
+            </div>
+            <div id="surgeon-content" data-role="content">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+						<input type="radio" name="radio-choice-b" id="surgeon-title-dr" value="dr" checked="checked" />
+			         	<label for="surgeon-title-dr">Dr.</label>
+			         	<input type="radio" name="radio-choice-b" id="surgeon-title-prof" value="prof" />
+			         	<label for="surgeon-title-prof">Prof.</label>
+			         	&nbsp;
+                        <input id="surgeon-input" placeholder="Surgeon name..." value="" type="text" />
+                    </fieldset>
+                </div>
+                <ul id="surgeon-list" data-role="listview" data-divider-theme="b" data-inset="true">
+
+                </ul>
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3>
+                    2012, All rights reserved. 
+                </h3>
+            </div>
+        </div>
+        <div data-role="page" id="page3">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    Operations
+                </h3>
+                <a data-role="button" data-transition="fade" href="#page1" data-icon="back" data-iconpos="left">
+                    Back
+                </a>
+            </div>
+            <div id="operation-content" data-role="content">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="textinput2">
+                            Name:
+                        </label>
+                        <input id="operation-input" placeholder="Operation new name..." value="" type="text" />
+                    </fieldset>
+                </div>
+                <ul id="operation-list" data-role="listview" data-divider-theme="b" data-inset="true">
+
+                </ul>
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3>
+                    2012, All rights reserved.
+                </h3>
+            </div>
+        </div>
+        <div data-role="page" id="page6">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    Results
+                </h3>
+                <a data-role="button" data-transition="fade" href="#page1" data-icon="back" data-iconpos="left">
+                    Back
+                </a>
+                <a data-role="button" data-transition="fade" href="#page6" data-icon="grid" data-iconpos="right">
+                    Report
+                </a>
+            </div>
+            <div data-role="content">
+                <div class="ui-grid-b">
+                    <div class="ui-block-a">
+                        <a data-role="button" data-transition="fade" data-theme="e" href="#page6" data-icon="arrow-l" data-iconpos="left">
+                            3/12
+                        </a>
+                    </div>
+                    <div class="ui-block-b">
+                        <div>
+                            <b>
+                                <br />
+                                &nbsp; &nbsp; &nbsp; &nbsp;4/12
+                                <br />
+                                <br />
+                            </b>
+                        </div>
+                    </div>
+                    <div class="ui-block-c">
+                        <a data-role="button" data-transition="fade" data-theme="e" href="#page6" data-icon="arrow-r" data-iconpos="right">
+                            5/12
+                        </a>
+                    </div>
+                </div>
+                <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                    <li data-role="list-divider" role="heading">
+                        Surgeries
+                    </li>
+                    <li data-theme="c">
+                        <a href="#" data-transition="slide">
+                            Button
+                        </a>
+                    </li>
+                    <li data-role="list-divider" role="heading">
+                        Sessions
+                    </li>
+                    <li data-theme="c">
+                        <a href="#page1" data-transition="slide">
+                            Button
+                        </a>
+                    </li>
+                    <li data-role="list-divider" role="heading">
+                        Shifts
+                    </li>
+                    <li data-theme="c">
+                        <a href="#page1" data-transition="slide">
+                            Button
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3>
+                    2012, All rights reserved.
+                </h3>
+            </div>
+        </div>
+        <div data-role="page" id="page7">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    Shift
+                </h3>
+                <a id="page7-back" data-role="button" data-transition="fade" href="#page1" data-icon="back" data-iconpos="left">
+                    Back
+                </a>
+            </div>
+            
+            <div id="shift-form" data-role="content">
+	        	<form action="" data-ajax="true">
+		            <div data-role="fieldcontain">
+					    <fieldset data-role="controlgroup">
+					        <label for="shift-date">
+					           Date
+					        </label>
+					        <input id="shift-date" type="date" />
+					    </fieldset>
+					</div>
+					<div data-role="fieldcontain">
+					    <fieldset data-role="controlgroup">
+					        <label for="shift-comments">
+					            Comments
+					        </label>
+					        <textarea id="shift-comments"></textarea>
+					    </fieldset>
+					</div>
+                    <input type="submit" value="Submit" />
+	            </form>
+            </div>
+
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3>
+                    2012, All rights reserved.
+                </h3>
+            </div>
+        </div>
+        <div data-role="page" id="page8">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    Session
+                </h3>
+                <a id="page8-back" data-role="button" data-transition="fade" href="#page1" data-icon="back" data-iconpos="left">
+                    Back
+                </a>
+            </div>
+            <div data-role="content">
+	            <div id="session-form" data-role="content">
+		        	<form action="" data-ajax="true">
+			            <div data-role="fieldcontain">
+						    <fieldset data-role="controlgroup">
+						        <label for="session-date">
+						           Date
+						        </label>
+						        <input id="session-date" type="date" />
+						    </fieldset>
+						</div>
+						<div data-role="fieldcontain">
+						    <fieldset data-role="controlgroup">
+						        <label for="session-comments">
+						            Comments
+						        </label>
+						        <textarea id="session-comments"></textarea>
+						    </fieldset>
+						</div>
+	                    <input type="submit" value="Submit" />
+		            </form>
+	            </div>
+
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3>
+                    2012, All rights reserved.
+                </h3>
+            </div>
+        </div>
+        <div data-role="page" id="page9">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    Surgery
+                </h3>
+                <a id="page9-back" data-role="button" data-transition="fade" href="#page1" data-icon="back" data-iconpos="left">
+                    Back
+                </a>
+            </div>
+            <div data-role="content">
+                <div data-role="fieldcontain">
+                    <label for="surgery-operation">
+                        Operation:
+                    </label>
+                    <select name="surgery-operation" id="surgery-operation">
+                        <option value="1">
+                            Appendectomy
+                        </option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="textinput6">
+                            Date
+                        </label>
+                        <input id="textinput6" placeholder="" value="" type="datetime" />
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="selectmenu2">
+                        Attendings:
+                    </label>
+                    <select name="selectmenu2" id="selectmenu2">
+                        <option value="1">
+                            Gutman
+                        </option>
+                        <option value="2">
+                            Rozin
+                        </option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="selectmenu3">
+                    </label>
+                    <select name="selectmenu3" id="selectmenu3">
+                        <option value="2">
+                            Rosin
+                        </option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="textinput8">
+                            Patient ID:
+                        </label>
+                        <input id="textinput8" placeholder="" value="" type="text" />
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="textinput7">
+                            Patient Name
+                        </label>
+                        <input id="textinput7" placeholder="" value="" type="text" />
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="textarea3">
+                            Comments
+                        </label>
+                        <textarea id="textarea3" placeholder=""></textarea>
+                    </fieldset>
+                </div>
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3>
+                    2012, All rights reserved.
+                </h3>
+            </div>
+        </div>
+        <script>
+            //App custom javascript
+        </script>
+    </body>
+</html>

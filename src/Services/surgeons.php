@@ -52,7 +52,9 @@ function surgeons_update($req, $res, $id, $name, $title) {
 function surgeons_delete($req, $res, $id) {
 	$query = 'DELETE FROM surgeons WHERE `id` =' . $id;
 	$result = runQuery ( $query );
-	return 'removed';
+	return array (
+			'id' => $id 
+	);
 }
 
 /**
@@ -62,7 +64,7 @@ function surgeons_delete($req, $res, $id) {
  * @param Response $res        	
  * @return array
  */
-function surgeons_read($req, $res, $uid) {
+function surgeons_read($req, $res, $uid = 1) {
 	$query = 'SELECT * from surgeons WHERE `uid` =' . $uid;
 	return runQuery ( $query );
 }
