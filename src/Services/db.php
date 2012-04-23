@@ -60,7 +60,8 @@ function runQuery($query) {
 	/* Select queries return a resultset */
 	
 	/* free result set */
-	mysqli_free_result ( $result );
+	if (!is_bool($result))
+		mysqli_free_result ( $result );
 	
 	/* close connection */
 	mysqli_close ( $mysqli );

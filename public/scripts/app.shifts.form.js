@@ -15,15 +15,27 @@ define([ 'jquery', 'underscore', 'backbone', 'shifts/model',
 			this.dateField = this.$el.find('#shift-date');
 			this.commentsField = this.$el.find('#shift-comments');
 			this.submitButton = this.$el.find('input[type=submit]');
+			
+			this.resetForm();
 		},
 
 		attributes : function() {
+			var d = this.dateField.val();
+			if (d === "") {
+				d = moment().format("MMM, DD YYYY");
+			}
 			return {
-				date : this.dateField.val(),
+				date : moment(d).format("YYYY-MM-DD"),
 				comments : this.commentsField.val()
 			};
 		},
 
+		resetForm : function () {
+			// reset form  
+			this.commentsField.val("");
+			this.dateField.val(moment().format("MMM, DD YYYY"));
+		},
+		
 		// If you hit `enter`, we're through editing the item.
 		createShift : function(e) {
 			if (this.submitButton.hasClass('disabled')
@@ -45,9 +57,7 @@ define([ 'jquery', 'underscore', 'backbone', 'shifts/model',
 					self.submitButton.removeClass('disabled');
 				},
 				success : function() {
-					// reset form  
-					self.dateField.val("");
-					self.commentsField.val("");
+					self.resetForm();
 
 					Shifts.add(shift);
 					self.form.data('user-created', true);

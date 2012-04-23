@@ -273,71 +273,62 @@
                     Back
                 </a>
             </div>
-            <div data-role="content">
-                <div data-role="fieldcontain">
-                    <label for="surgery-operation">
-                        Operation:
-                    </label>
-                    <select name="surgery-operation" id="surgery-operation">
-                        <option value="1">
-                            Appendectomy
-                        </option>
-                    </select>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup">
-                        <label for="textinput6">
-                            Date
-                        </label>
-                        <input id="textinput6" placeholder="" value="" type="datetime" />
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <label for="selectmenu2">
-                        Attendings:
-                    </label>
-                    <select name="selectmenu2" id="selectmenu2">
-                        <option value="1">
-                            Gutman
-                        </option>
-                        <option value="2">
-                            Rozin
-                        </option>
-                    </select>
-                </div>
-                <div data-role="fieldcontain">
-                    <label for="selectmenu3">
-                    </label>
-                    <select name="selectmenu3" id="selectmenu3">
-                        <option value="2">
-                            Rosin
-                        </option>
-                    </select>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup">
-                        <label for="textinput8">
-                            Patient ID:
-                        </label>
-                        <input id="textinput8" placeholder="" value="" type="text" />
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup">
-                        <label for="textinput7">
-                            Patient Name
-                        </label>
-                        <input id="textinput7" placeholder="" value="" type="text" />
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup">
-                        <label for="textarea3">
-                            Comments
-                        </label>
-                        <textarea id="textarea3" placeholder=""></textarea>
-                    </fieldset>
-                </div>
+            <div id="surgery-form" data-role="content">
+            	<form action="" data-ajax="true">
+	                <div data-role="fieldcontain">
+	                    <label for="surgery-operation">
+	                        Operation:
+	                    </label>
+	                    <select name="surgery-operation" id="surgery-operation">
+	                    </select>
+	                </div>
+	                <div data-role="fieldcontain">
+	                    <fieldset data-role="controlgroup">
+	                        <label for="surgery-date">
+	                            Date
+	                        </label>
+	                        <input id="surgery-date" placeholder="" value="" type="datetime" />
+	                    </fieldset>
+	                </div>
+	                <div data-role="fieldcontain">
+	                    <label for="surgery-surgeon-a">
+	                        Surgeons:
+	                    </label>
+	                    <select name="surgery-surgeon-a" id="surgery-surgeon-a">
+	                    </select>
+	                </div>
+	                <div data-role="fieldcontain">
+	                    <label for="surgery-surgeon-b">
+	                    </label>                
+	                    <select name="surgery-surgeon-b" id="surgery-surgeon-b">
+	                    </select>
+	                </div>
+	                <div data-role="fieldcontain">
+	                    <fieldset data-role="controlgroup">
+	                        <label for="surgery-patient-id">
+	                            Patient ID:
+	                        </label>
+	                        <input id="surgery-patient-id" placeholder="" value="" type="text" />
+	                    </fieldset>
+	                </div>
+	                <div data-role="fieldcontain">
+	                    <fieldset data-role="controlgroup">
+	                        <label for="surgery-patient-name">
+	                            Patient Name
+	                        </label>
+	                        <input id="surgery-patient-name" placeholder="" value="" type="text" />
+	                    </fieldset>
+	                </div>
+	                <div data-role="fieldcontain">
+	                    <fieldset data-role="controlgroup">
+	                        <label for="surgery-comments">
+	                            Comments
+	                        </label>
+	                        <textarea id="surgery-comments" placeholder=""></textarea>
+	                    </fieldset>
+	                </div>
+                    <input type="submit" value="Submit" />
+                </form>
             </div>
             <div data-theme="a" data-role="footer" data-position="fixed">
                 <h3>

@@ -31,6 +31,13 @@ $gateful->post ( '/doc-reports/sessions', 'sessions_create' );
 $gateful->delete ( '/doc-reports/sessions/:id', 'sessions_delete' );
 $gateful->put ( '/doc-reports/sessions/:id', 'sessions_update' );
 
+// bb style - surgeries
+$gateful->get ( '/doc-reports/surgeries', 'surgeries_read' );
+$gateful->get ( '/doc-reports/surgeries/:id', 'surgeries_read' );
+$gateful->post ( '/doc-reports/surgeries', 'surgeries_create' );
+$gateful->delete ( '/doc-reports/surgeries/:id', 'surgeries_delete' );
+$gateful->put ( '/doc-reports/surgeries/:id', 'surgeries_update' );
+
 $gateful->send ();
 
 /*

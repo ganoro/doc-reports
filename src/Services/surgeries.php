@@ -18,9 +18,9 @@
  * @param string $uid        	
  * @return array
  */
-function surgeries_create($req, $res, $date, $op_type, $first, $second, $third, $patient_id, $patient_name, $comments, $uid) {
+function surgeries_create($req, $res, $date, $op_type, $first, $second, $patient_id, $patient_name, $comments, $uid) {
 	$date = formatDate ( $date );
-	$query = 'INSERT INTO surgeries (`date`, `op_type`, `first`, `second`, `third`, `patient_id`, `patient_name`, `comments`, `uid`) VALUES (\'' . $date . '\', \'' . $op_type . '\',\'' . $first . '\', \'' . $second . '\', \'' . $third . '\', \'' . $patient_id . '\', \'' . $patient_name . '\', \'' . $comments . '\', \'' . $uid . '\')';
+	$query = 'INSERT INTO surgeries (`date`, `op_type`, `first`, `second`, `patient_id`, `patient_name`, `comments`, `uid`) VALUES (\'' . $date . '\', \'' . $op_type . '\',\'' . $first . '\', \'' . $second . '\', \'' . $patient_id . '\', \'' . $patient_name . '\', \'' . $comments . '\', \'' . $uid . '\')';
 	$result = runQuery ( $query );
 	return array (
 			"id" => $result 

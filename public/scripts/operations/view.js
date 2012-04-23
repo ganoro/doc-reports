@@ -38,12 +38,7 @@ define([ 'jquery', 'underscore', 'backbone', 'text!operations/template.html',
 					$(this).parents('li').slideUp();
 				}
 			});
-			this.input = this.$('#operation-input');
-			
-			this.$('#surgery-operation').append(new Option(this.model.name, this.model.id, true, true));
-
-			// $("#list option:selected").text();
-			
+			$('#surgery-operation').append(new Option(this.model.get('name'), this.model.get('id'), false));
 			return this;
 		},
 

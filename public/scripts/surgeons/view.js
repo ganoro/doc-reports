@@ -38,7 +38,9 @@ define([ 'jquery', 'underscore', 'backbone', 'text!surgeons/template.html',
 					$(this).parents('li').slideUp();
 				}
 			});
-			this.input = this.$('#surgeon-input');
+			this.input = $('#surgeon-input');
+			$('#surgery-surgeon-a').append(new Option(this.model.get('name'), this.model.get('id'), true, true));
+			$('#surgery-surgeon-b').append(new Option(this.model.get('name'), this.model.get('id'), true, true));
 			return this;
 		},
 

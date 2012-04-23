@@ -51,6 +51,7 @@ class Dispatch extends ServiceInstruction {
 					'res' => $res 
 			);
 			$requestParameters = $this->getRequestParameters ( $req );
+			
 			$params = $routeMatch->getParams ();
 			$methodParams = $this->getMethodParams ( $target->getCallback () );
 			if ($methodParams == null) {
@@ -71,7 +72,7 @@ class Dispatch extends ServiceInstruction {
 				}
 			}
 			
-			// dispatch 
+			// dispatch
 			$event->setParam ( 'result', call_user_func_array ( $target, $data ) );
 		}
 	}
@@ -86,13 +87,12 @@ class Dispatch extends ServiceInstruction {
 	private function getRequestParameters($req) {
 		$contentHeader = $req->headers ()->get ( "content-type" );
 		$requestParameters = array ();
-		if (! empty ( $contentHeader ) && $contentHeader->getFieldValue () == "application/json") {
+		if (! empty ( $contentHeader ) && strpos ( $contentHeader->getFieldValue (), "application/json" ) !== false) {
 			$content = file_get_contents ( "php://input" );
 			if (! empty ( $content )) {
 				$decoded = json_decode ( $content );
-				$requestParameters = get_object_vars($decoded);
+				$requestParameters = get_object_vars ( $decoded );
 			}
-			
 		} else {
 			if ($req->isGet ()) {
 				$requestParameters = $req->query ()->toArray ();

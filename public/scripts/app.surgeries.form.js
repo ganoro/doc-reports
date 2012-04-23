@@ -1,19 +1,25 @@
-define([ 'jquery', 'underscore', 'backbone', 'sessions/model',
-		'sessions/collection', 'moment' ], function($, _, Backbone, Session, Sessions) {
-	var SessionFormView = Backbone.View.extend({
+define([ 'jquery', 'underscore', 'backbone', 'surgeries/model',
+		'surgeries/collection', 'moment' ], function($, _, Backbone, Surgery, Surgeries) {
+	var SurgeryFormView = Backbone.View.extend({
 
-		el : '#session-form',
+		el : '#surgery-form',
 
 		// Delegated events for creating new items, and clearing
 		// completed ones.
 		events : {
-			'submit form' : 'createSession'
+			'submit form' : 'createSurgery'
 		},
 
 		initialize : function() {
-			this.form = this.$el.find('session-form');
-			this.dateField = this.$el.find('#session-date');
-			this.commentsField = this.$el.find('#session-comments');
+			this.form = this.$el.find('surgery-form');
+
+			this.operationField = this.$el.find('#surgery-operation');
+			this.dateField = this.$el.find('#surgery-date');
+			this.surgeonAField = this.$el.find('#surgery-surgeon-a');
+			this.surgeonBField = this.$el.find('#surgery-surgeon-b');
+			this.patientIdField = this.$el.find('#surgery-patient-id');
+			this.patientNameField = this.$el.find('#surgery-patient-name');
+			this.commentsField = this.$el.find('#surgery-comments');
 			this.submitButton = this.$el.find('input[type=submit]');
 			
 			this.resetForm();
@@ -24,20 +30,27 @@ define([ 'jquery', 'underscore', 'backbone', 'sessions/model',
 			if (d === "") {
 				d = moment().format("MMM, DD YYYY");
 			}
+			
 			return {
+				op_type : this.operationField.val(),
 				date : moment(d).format("YYYY-MM-DD"),
+				first : this.surgeonAField.val(),
+				second : this.surgeonBField.val(),
+				patient_id : this.patientIdField.val(),
+				patient_name : this.patientNameField.val(),
 				comments : this.commentsField.val()
 			};
 		},
 
 		resetForm : function () {
-			// reset form  
+			this.patientIdField.val("");
+			this.patientNameField.val("");
 			this.commentsField.val("");
-			this.dateField.val(moment().format("MMM, DD YYYY"));
+			this.dateField.val(moment().format("MMM, DD YYYY hh:mm"));
 		},
 		
 		// If you hit `enter`, we're through editing the item.
-		createSession : function(e) {
+		createSurgery : function(e) {
 			if (this.submitButton.hasClass('disabled')
 					&& this.form.data('user-created') !== true) {
 				return false;
@@ -45,8 +58,8 @@ define([ 'jquery', 'underscore', 'backbone', 'sessions/model',
 				this.submitButton.addClass('disabled');
 			}
 
-			var self = this, session = new Session(this.attributes());
-			session.save(session, {
+			var self = this, surgery = new Surgery(this.attributes());
+			surgery.save(surgery, {
 				error : function(originalModel, resp, options) {
 					self.$el.find('input').removeClass('error');
 					var errors = JSON.parse(resp.responseText).errors;
@@ -57,13 +70,13 @@ define([ 'jquery', 'underscore', 'backbone', 'sessions/model',
 					self.submitButton.removeClass('disabled');
 				},
 				success : function() {
+					// reset form
 					self.resetForm();
 
-					Sessions.add(session);
-
+					Surgeries.add(surgery);
 					self.form.data('user-created', true);
 					self.submitButton.removeClass('disabled');
-					 $("#page7-back").trigger("click");
+					$("#page9-back").trigger("click");
 				}
 			});
 
@@ -71,5 +84,5 @@ define([ 'jquery', 'underscore', 'backbone', 'sessions/model',
 		},
 
 	});
-	return SessionFormView;
+	return SurgeryFormView;
 });
