@@ -73,7 +73,7 @@ function surgeries_delete($req, $res, $id) {
  * @param unknown_type $uid        	
  * @return multitype:
  */
-function surgeries_read($req, $res, $uid) {
+function surgeries_read($req, $res, $uid = 1) {
 	$query = 'SELECT * from surgeries WHERE `uid` =' . $uid;
 	return runQuery ( $query );
 }
