@@ -15,7 +15,7 @@
  */
 function shifts_create($req, $res, $date, $comments, $uid) {
 	$date = formatDate ( $date );
-	$query = 'INSERT INTO shifts (`report_date`, `comments`, `uid`) VALUES (\'' . $date . '\', \'' . $comments . '\', \'' . $uid . '\')';
+	$query = 'INSERT INTO shifts (`date`, `comments`, `uid`) VALUES (\'' . $date . '\', \'' . $comments . '\', \'' . $uid . '\')';
 	$result = runQuery ( $query );
 	return array (
 			"id" => $result 
@@ -32,7 +32,7 @@ function shifts_create($req, $res, $date, $comments, $uid) {
  */
 function shifts_update($req, $res, $id, $date, $comments) {
 	$date = formatDate ( $date );
-	$query = 'UPDATE shifts SET `report_date` = \'' . $date . '\', `comments` = \'' . $comments . '\' WHERE `shifts`.`id` = ' . $id;
+	$query = 'UPDATE shifts SET `date` = \'' . $date . '\', `comments` = \'' . $comments . '\' WHERE `shifts`.`id` = ' . $id;
 	$result = runQuery ( $query );
 	return array (
 			'id' => $id 

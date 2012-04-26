@@ -16,7 +16,7 @@
  */
 function sessions_create($req, $res, $date, $comments, $uid) {
 	$date = formatDate ( $date );
-	$query = 'INSERT INTO sessions (`report_date`, `comments`, `uid`) VALUES (\'' . $date . '\', \'' . $comments . '\', \'' . $uid . '\')';
+	$query = 'INSERT INTO sessions (`date`, `comments`, `uid`) VALUES (\'' . $date . '\', \'' . $comments . '\', \'' . $uid . '\')';
 	$result = runQuery ( $query );
 	return array (
 			"id" => $result 
@@ -33,7 +33,7 @@ function sessions_create($req, $res, $date, $comments, $uid) {
  */
 function sessions_update($req, $res, $id, $date, $comments) {
 	$date = formatDate ( $date );
-	$query = 'UPDATE sessions SET `report_date` = \'' . $date . '\', `comments` = \'' . $comments . '\' WHERE `sessions`.`id` = ' . $id;
+	$query = 'UPDATE sessions SET `date` = \'' . $date . '\', `comments` = \'' . $comments . '\' WHERE `sessions`.`id` = ' . $id;
 	$result = runQuery ( $query );
 	return array (
 			"id" => $id 

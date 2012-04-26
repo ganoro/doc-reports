@@ -25,7 +25,7 @@ CREATE TABLE  `operations` (
 DROP TABLE IF EXISTS sessions;
 CREATE TABLE  `sessions` (
 	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT  'id',
-	`report_date` DATE NOT NULL COMMENT  'date',
+	`date` DATE NOT NULL COMMENT  'date',
 	`comments` VARCHAR( 300 ) CHARACTER SET utf8 COLLATE utf8_bin NULL COMMENT  'comments',
 	`uid` INT NOT NULL COMMENT  'user id',	
 	INDEX (  `uid` )
@@ -34,7 +34,7 @@ CREATE TABLE  `sessions` (
 DROP TABLE IF EXISTS shifts;
 CREATE TABLE  `shifts` (
 	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT  'id',
-	`report_date` DATE NOT NULL COMMENT  'date',
+	`date` DATE NOT NULL COMMENT  'date',
 	`comments` VARCHAR( 300 ) CHARACTER SET utf8 COLLATE utf8_bin NULL COMMENT  'comments',
 	`uid` INT NOT NULL COMMENT  'user id',	
 	INDEX (  `uid` )
@@ -43,12 +43,13 @@ CREATE TABLE  `shifts` (
 DROP TABLE IF EXISTS surgeries;
 CREATE TABLE  `surgeries` (
 	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT  'id',
-	`date` DATE NOT NULL COMMENT  'date',
+	`date` DATETIME NOT NULL COMMENT  'date',
 	`op_type` INT NOT NULL COMMENT  'operation type ',
 	`first` INT NOT NULL COMMENT  'first surgeon',
 	`second` INT NULL COMMENT  'second surgeon',
 	`patient_id` VARCHAR( 10 ) NOT NULL COMMENT  'id of patient ',
 	`patient_name` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT  'name of patient ',
+	`pathology` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT  'pathology',
 	`comments` VARCHAR( 300 ) CHARACTER SET utf8 COLLATE utf8_bin NULL COMMENT  'comments',
 	`uid` INT NOT NULL COMMENT  'user id',	
 	INDEX (  `uid`, `first`, `second`, `op_type` )

@@ -18,7 +18,7 @@ define([ 'jquery', 'underscore', 'backbone', 'text!shifts/template.html',
 
 		// Re-render the contents of the todo item.
 		render : function() {
-			$(this.el).html(this.template(this.model.toJSON()));
+			$(this.el).html(this.template(this.model.normalize()));
 			$(this.el).attr("data-theme", "c");
 			$(this.el).attr("data-swipeurl", "");
 			var model = this.model;

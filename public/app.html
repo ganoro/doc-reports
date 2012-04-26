@@ -132,7 +132,7 @@
                 </a>
             </div>
             <div data-role="content">
-                <ul id="report-list" data-role="listview" data-divider-theme="b" data-inset="true">
+                <ul id="report-list" data-role="listview" data-divider-theme="b" data-inset="true" data-filter="true">
                     <li id="surgeries-divider" data-role="list-divider" role="heading">
                         Surgeries
                     </li>
@@ -280,6 +280,14 @@
 	                            Patient Name
 	                        </label>
 	                        <input id="surgery-patient-name" placeholder="" value="" type="text" />
+	                    </fieldset>
+	                </div>
+	                <div data-role="fieldcontain">
+	                    <fieldset data-role="controlgroup">
+	                        <label for="surgery-pathology">
+	                            Pathology
+	                        </label>
+	                        <input id="surgery-pathology" placeholder="" value="" type="text" />
 	                    </fieldset>
 	                </div>
 	                <div data-role="fieldcontain">

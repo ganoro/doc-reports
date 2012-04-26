@@ -6,7 +6,7 @@ define([ 'jquery', 'underscore', 'backbone', 'moment' ], function($, _, Backbone
 			uid : "1",
 		},
 
-		url : '/doc-reports/shifts',
+		urlRoot : '/doc-reports/shifts',
 		
 		initialize : function() {
 			if (!this.get("date")) {
@@ -22,7 +22,13 @@ define([ 'jquery', 'underscore', 'backbone', 'moment' ], function($, _, Backbone
 				return "Remember to set a date to the shift";
 			}
 		},
-
+		
+		normalize : function() {
+			var n = this.toJSON();
+			n.date = moment(this.get("date")).format("LLLL");
+			return n;
+		},
+		
 		clear : function() {
 			this.destroy();
 		},

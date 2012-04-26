@@ -22,7 +22,7 @@ define([ 'jquery', 'underscore', 'backbone', 'shifts/model',
 		attributes : function() {
 			var d = this.dateField.val();
 			if (d === "") {
-				d = moment().format("MMM, DD YYYY");
+				d = moment().format("MMM DD, YYYY");
 			}
 			return {
 				date : moment(d).format("YYYY-MM-DD"),
@@ -33,7 +33,7 @@ define([ 'jquery', 'underscore', 'backbone', 'shifts/model',
 		resetForm : function () {
 			// reset form  
 			this.commentsField.val("");
-			this.dateField.val(moment().format("MMM, DD YYYY"));
+			this.dateField.val(moment().format("MMM DD, YYYY"));
 		},
 		
 		// If you hit `enter`, we're through editing the item.

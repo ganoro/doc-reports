@@ -8,7 +8,7 @@ define([ 'jquery', 'underscore', 'backbone', 'surgeons/collection',
 			uid : "1",
 		},
 
-		url : '/doc-reports/surgeries',
+		urlRoot : '/doc-reports/surgeries',
 
 		initialize : function() {
 			if (!this.get("date")) {
@@ -44,6 +44,7 @@ define([ 'jquery', 'underscore', 'backbone', 'surgeons/collection',
 		
 		normalize : function() {
 			var n = this.toJSON();
+			n.date = moment(this.get("date")).format("LLLL");
 			n.first = this.surgeonName(this.get("first"));
 			n.second = this.surgeonName(this.get("second"));
 			n.op_type = this.operationName(this.get("op_type"));

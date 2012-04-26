@@ -6,7 +6,7 @@ define([ 'jquery', 'underscore', 'backbone', 'moment' ], function($, _, Backbone
 			uid : "1",
 		},
 
-		url : '/doc-reports/sessions',
+		urlRoot : '/doc-reports/sessions',
 		
 		initialize : function() {
 			if (!this.get("date")) {
@@ -22,6 +22,12 @@ define([ 'jquery', 'underscore', 'backbone', 'moment' ], function($, _, Backbone
 				return "Remember to set a date to the session";
 			}
 		},
+		
+		normalize : function() {
+			var n = this.toJSON();
+			n.date = moment(this.get("date")).format("LLLL");
+			return n;
+		},		
 
 		clear : function() {
 			this.destroy();

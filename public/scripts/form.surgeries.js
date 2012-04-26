@@ -19,6 +19,7 @@ define([ 'jquery', 'underscore', 'backbone', 'surgeries/model',
 			this.surgeonBField = this.$el.find('#surgery-surgeon-b');
 			this.patientIdField = this.$el.find('#surgery-patient-id');
 			this.patientNameField = this.$el.find('#surgery-patient-name');
+			this.pathologyField = this.$el.find('#surgery-pathology');
 			this.commentsField = this.$el.find('#surgery-comments');
 			this.submitButton = this.$el.find('input[type=submit]');
 			
@@ -28,16 +29,17 @@ define([ 'jquery', 'underscore', 'backbone', 'surgeries/model',
 		attributes : function() {
 			var d = this.dateField.val();
 			if (d === "") {
-				d = moment().format("MMM, DD YYYY");
+				d = moment().format("YYYY-MM-DD hh:mm");
 			}
 			
 			return {
 				op_type : this.operationField.val(),
-				date : moment(d).format("YYYY-MM-DD"),
+				date : moment(d, "MMM DD, YYYY hh:mm").format("YYYY-MM-DD HH:mm"),
 				first : this.surgeonAField.val(),
 				second : this.surgeonBField.val(),
 				patient_id : this.patientIdField.val(),
 				patient_name : this.patientNameField.val(),
+				pathology : this.pathologyField.val(),
 				comments : this.commentsField.val()
 			};
 		},
@@ -45,8 +47,9 @@ define([ 'jquery', 'underscore', 'backbone', 'surgeries/model',
 		resetForm : function () {
 			this.patientIdField.val("");
 			this.patientNameField.val("");
+			this.pathologyField.val("");
 			this.commentsField.val("");
-			this.dateField.val(moment().format("MMM, DD YYYY hh:mm"));
+			this.dateField.val(moment().format("MMM DD, YYYY hh:mm"));
 		},
 		
 		// If you hit `enter`, we're through editing the item.
