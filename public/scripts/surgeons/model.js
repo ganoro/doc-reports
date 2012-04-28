@@ -8,6 +8,7 @@ define([ 'jquery', 'underscore', 'backbone' ], function($, _, Backbone) {
 		},
 
 		initialize : function() {
+			this.setCounter(0);
 			if (!this.get("name")) {
 				setName(this.defaults.name);
 			}
@@ -38,6 +39,16 @@ define([ 'jquery', 'underscore', 'backbone' ], function($, _, Backbone) {
 			});
 		},
 
+		setCounter: function(i) {
+			this.set({
+				"counter" : i
+			});
+		},
+		
+		increment : function(diff) {
+			this.setCounter(this.get('counter') + diff);
+		},
+		
 		setTitle : function(title) {
 			this.set({
 				"title" : title

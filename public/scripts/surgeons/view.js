@@ -5,6 +5,11 @@ define([ 'jquery', 'underscore', 'backbone', 'text!surgeons/template.html',
 		// ... is a list tag.
 		tagName : "li",
 
+		attributes : {
+			'data-theme' : 'c',
+			'data-swipeurl' : ''
+		},
+		
 		// Cache the template function for a single item.
 		template : _.template(surgeonTemplate),
 
@@ -16,17 +21,15 @@ define([ 'jquery', 'underscore', 'backbone', 'text!surgeons/template.html',
 		// this
 		// app, we set a direct reference on the model for convenience.
 		initialize : function() {
-			_.bindAll(this, 'render', 'close', 'remove');
+			_.bindAll(this, 'render', 'close', 'remove', 'updateBubble');
 			this.model.bind('change:name', this.render);
-			this.model.bind('change:title', this.render);
+			this.model.bind('change:counter', this.updateBubble);
 			this.model.bind('destroy', this.remove);
 		},
 
 		// Re-render the contents of the todo item.
 		render : function() {
 			$(this.el).html(this.template(this.model.toJSON()));
-			$(this.el).attr("data-theme", "c");
-			$(this.el).attr("data-swipeurl", "");
 			var model = this.model;
 			$(this.el).swipeDelete({
 				btnTheme : 'e',
@@ -42,6 +45,13 @@ define([ 'jquery', 'underscore', 'backbone', 'text!surgeons/template.html',
 			$('#surgery-surgeon-a').append(new Option(this.model.get('name'), this.model.get('id'), true, true));
 			$('#surgery-surgeon-b').append(new Option(this.model.get('name'), this.model.get('id'), true, true));
 			return this;
+		},
+
+		updateBubble : function() {
+			var n = this.$('#surgeon-' + this.model.get('id'));
+			if (n != undefined) {
+				n.html(this.model.get("counter"));
+			}
 		},
 
 		// Close the `"editing"` mode, saving changes to the todo.

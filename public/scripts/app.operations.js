@@ -1,13 +1,13 @@
 define([ 'jquery', 'underscore', 'backbone', 'operations/collection',
-		'operations/view' ], function($, _, Backbone, Operations,
-		OperationsView) { 
+		'operations/view'], function($, _, Backbone,
+		Operations, OperationsView) {
 	var AppOperationView = Backbone.View.extend({
 
 		// Instead of generating a new element, bind to the existing skeleton of
 		// the App already present in the HTML.
 		el : $("#page3"),
-		
-		lista: $("#operation-list"),
+
+		lista : $("#operation-list"),
 
 		// Delegated events for creating new items, and clearing completed ones.
 		events : {
@@ -20,7 +20,7 @@ define([ 'jquery', 'underscore', 'backbone', 'operations/collection',
 		// loading any preexisting operations that might be saved in
 		// *localStorage*.
 		initialize : function() {
-			_.bindAll(this, 'addOne', 'addAll', 'render');
+			_.bindAll(this, 'addOne', 'addAll', 'render', 'updateBubble');
 
 			this.input = this.$("#operation-input");
 
@@ -46,19 +46,32 @@ define([ 'jquery', 'underscore', 'backbone', 'operations/collection',
 			this._internalAddOne(el);
 		},
 
+		updateBubble : function() {
+			var start = new Date().getTime();
+			if (window.startBubble == undefined || window.startBubble > start) {
+				window.startBubble = start;
+			}
+			setTimeout(function() {
+				if (window.startBubble == start) {
+					alert (start);
+				}
+			}, 3000);
+
+		},
+
 		// Add all items in the **Operations** collection at once.
 		addAll : function() {
 			this.lista.empty();
 			Operations.each(this.addOne);
 		},
-		
-		_internalAddOne: function(el) {
+
+		_internalAddOne : function(el) {
 			this.lista.append(el);
 			if (this.lista.hasClass('ui-listview')) {
 				this.lista.listview('refresh');
-	        } else {
-	        	this.lista.trigger('create');
-	        }			
+			} else {
+				this.lista.trigger('create');
+			}
 		},
 
 		// Generate the attributes for a new Todo item.

@@ -52,6 +52,6 @@ CREATE TABLE  `surgeries` (
 	`pathology` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT  'pathology',
 	`comments` VARCHAR( 300 ) CHARACTER SET utf8 COLLATE utf8_bin NULL COMMENT  'comments',
 	`uid` INT NOT NULL COMMENT  'user id',	
-	INDEX (  `uid`, `first`, `second`, `op_type` )
+	INDEX ( `first`, `second`, `op_type` )
 ) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_bin;
 

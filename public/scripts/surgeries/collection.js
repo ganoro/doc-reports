@@ -15,6 +15,23 @@ define([ 'jquery', 'underscore', 'backbone', 'surgeries/model' ], function($,
 			});
 		},
 
+		countOperations : function(id) {
+			var operations = this.where({
+				op_type : id
+			});
+			return operations.length;
+		},
+
+		countSurgeons : function(id) {
+			var first = this.where({
+				first : id
+			});
+			var second = this.where({
+				second : id
+			});
+			return first.length + second.length;
+		},
+
 	});
 	return new SurgeriesCollection;
 });

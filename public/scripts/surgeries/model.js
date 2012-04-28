@@ -17,6 +17,7 @@ define([ 'jquery', 'underscore', 'backbone', 'surgeons/collection',
 			if (!this.get("uid")) {
 				this.setUid(this.defaults.uid);
 			}
+			this.inc();
 		},
 
 		validate : function(attribs) {
@@ -41,7 +42,7 @@ define([ 'jquery', 'underscore', 'backbone', 'surgeons/collection',
 				return "Remember to set a operation type to the surgery";
 			}
 		},
-		
+
 		normalize : function() {
 			var n = this.toJSON();
 			n.date = moment(this.get("date")).format("LLLL");
@@ -50,19 +51,43 @@ define([ 'jquery', 'underscore', 'backbone', 'surgeons/collection',
 			n.op_type = this.operationName(this.get("op_type"));
 			return n;
 		},
+
+		inc : function() {
+			this.updateCounters(+1);
+		},
 		
-		surgeonName : function (id) {
+		dec : function() {
+			this.updateCounters(-1);
+		},
+		
+		updateCounters : function(diff) {
+			var op = Operations.get(this.get("op_type"));
+			if (op != undefined) {
+				op.increment(diff);
+			}
+			var first = Surgeons.get(this.get("first"));
+			if (first != undefined) {
+				first.increment(diff);
+			}
+			var second = Surgeons.get(this.get("second"));
+			if (second != undefined) {
+				second.increment(diff);
+			}
+		},
+		
+		surgeonName : function(id) {
 			var m = Surgeons.get(id);
 			return m != undefined ? m.get("name") : "Unknonwn";
 		},
 
-		operationName : function (id) {
+		operationName : function(id) {
 			var m = Operations.get(id);
 			return m != undefined ? m.get("name") : "Unknonwn";
 		},
-		
+
 		clear : function() {
 			this.destroy();
+			this.dec();
 		},
 
 		setId : function(id) {

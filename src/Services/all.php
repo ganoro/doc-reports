@@ -6,3 +6,4 @@ require_once 'Services/sessions.php';
 require_once 'Services/shifts.php';
 require_once 'Services/surgeries.php';
 require_once 'Services/users.php';
+require_once 'Services/reports.php';
