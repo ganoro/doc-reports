@@ -22,7 +22,11 @@ define([ 'jquery', 'underscore', 'backbone', 'sessions/collection',
 			Sessions.bind('reset', this.addAll);
 			Sessions.bind('all', this.render);
 
-			Sessions.fetch();
+			Sessions.fetch({
+				data : $.param({
+					uid : uid
+				})
+			});
 		},
 
 		render : function() {

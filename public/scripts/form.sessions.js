@@ -13,6 +13,7 @@ define([ 'jquery', 'underscore', 'backbone', 'sessions/model',
 		initialize : function() {
 			this.form = this.$el.find('session-form');
 			this.dateField = this.$el.find('#session-date');
+			this.uidField = this.$el.find('#session-uid');
 			this.commentsField = this.$el.find('#session-comments');
 			this.submitButton = this.$el.find('input[type=submit]');
 			
@@ -26,6 +27,7 @@ define([ 'jquery', 'underscore', 'backbone', 'sessions/model',
 			}
 			return {
 				date : moment(d).format("YYYY-MM-DD"),
+				uid : this.uidField.val(),
 				comments : this.commentsField.val()
 			};
 		},

@@ -26,6 +26,9 @@ define([ 'jquery', 'underscore', 'backbone'],
 
 			normalize : function() {
 				var n = this.toJSON();
+				if (this.get('id') == undefined) {
+					n.id = this.cid;
+				}
 				return n;
 			},
 

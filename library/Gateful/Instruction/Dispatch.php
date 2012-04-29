@@ -61,7 +61,7 @@ class Dispatch extends ServiceInstruction {
 			foreach ( $methodParams as $param ) {
 				$name = $param->getName ();
 				if ($param->isOptional ()) {
-					$data [$name] = ! empty ( $params [$name] ) ? $params [$name] : $param->getDefaultValue ();
+					$data [$name] = ! empty ( $requestParameters [$name] ) ? $requestParameters [$name] : $param->getDefaultValue ();
 				} else if (! empty ( $params [$name] )) {
 					$data [$name] = $params [$name];
 				} else {
@@ -85,21 +85,26 @@ class Dispatch extends ServiceInstruction {
 	 * @return array
 	 */
 	private function getRequestParameters($req) {
-		$contentHeader = $req->headers ()->get ( "content-type" );
+		
 		$requestParameters = array ();
+		
+		// GET and POST paraneters
+		if ($req->isGet ()) {
+			$requestParameters = $req->query ()->toArray ();
+		} else if ($req->isPost ()) {
+			$requestParameters = $req->post ()->toArray ();
+		}
+		
+		// json parameters can be provided in the body as well
+		$contentHeader = $req->headers ()->get ( "content-type" );
 		if (! empty ( $contentHeader ) && strpos ( $contentHeader->getFieldValue (), "application/json" ) !== false) {
 			$content = file_get_contents ( "php://input" );
 			if (! empty ( $content )) {
 				$decoded = json_decode ( $content );
-				$requestParameters = get_object_vars ( $decoded );
+				$requestParameters = array_merge($requestParameters, get_object_vars ( $decoded ));
 			}
-		} else {
-			if ($req->isGet ()) {
-				$requestParameters = $req->query ()->toArray ();
-			} else if ($req->isPost ()) {
-				$requestParameters = $req->post ()->toArray ();
-			}
-		}
+		} 
+		
 		return $requestParameters;
 	}
 	private function getServiceMethodParams($serviceName, $method) {

@@ -20,6 +20,7 @@ define([ 'jquery', 'underscore', 'backbone', 'surgeries/model',
 			this.patientIdField = this.$el.find('#surgery-patient-id');
 			this.patientNameField = this.$el.find('#surgery-patient-name');
 			this.pathologyField = this.$el.find('#surgery-pathology');
+			this.uidField = this.$el.find('#surgery-uid');
 			this.commentsField = this.$el.find('#surgery-comments');
 			this.submitButton = this.$el.find('input[type=submit]');
 			
@@ -40,6 +41,7 @@ define([ 'jquery', 'underscore', 'backbone', 'surgeries/model',
 				patient_id : this.patientIdField.val(),
 				patient_name : this.patientNameField.val(),
 				pathology : this.pathologyField.val(),
+				uid : this.uidField.val(),
 				comments : this.commentsField.val()
 			};
 		},

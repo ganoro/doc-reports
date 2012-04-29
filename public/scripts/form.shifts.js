@@ -13,6 +13,7 @@ define([ 'jquery', 'underscore', 'backbone', 'shifts/model',
 		initialize : function() {
 			this.form = this.$el.find('shift-form');
 			this.dateField = this.$el.find('#shift-date');
+			this.uidField = this.$el.find('#shift-uid');
 			this.commentsField = this.$el.find('#shift-comments');
 			this.submitButton = this.$el.find('input[type=submit]');
 			
@@ -26,6 +27,7 @@ define([ 'jquery', 'underscore', 'backbone', 'shifts/model',
 			}
 			return {
 				date : moment(d).format("YYYY-MM-DD"),
+				uid : this.uidField.val(),
 				comments : this.commentsField.val()
 			};
 		},

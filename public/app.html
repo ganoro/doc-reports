@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:fb="http://ogp.me/ns/fb#">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,6 +10,8 @@
 		<script data-main="scripts/main" src="lib/require-jquery.js"></script>
     </head>
     <body>
+		<div id="fb-root"></div>
+
         <div data-role="page" id="page1">
             <div data-theme="a" data-role="header">
                 <h3>
@@ -54,6 +56,8 @@
                         </a>
                     </div>
                 </div>
+                
+                <fb:login-button show-faces="true" width="300" max-rows="2"></fb:login-button>
             </div>
             <div data-theme="a" data-role="footer" data-position="fixed">
                 <h3>
@@ -79,6 +83,7 @@
 			         	<label for="surgeon-title-prof">Prof.</label>
 			         	&nbsp;
                         <input id="surgeon-input" placeholder="Surgeon name..." value="" type="text" />
+                        <input id="surgeon-uid" value="1" type="text" style="visibility: hidden;" />
                     </fieldset>
                 </div>
                 <ul id="surgeon-list" data-role="listview" data-divider-theme="b" data-inset="true">
@@ -107,6 +112,7 @@
                             Name:
                         </label>
                         <input id="operation-input" placeholder="Operation new name..." value="" type="text" />
+                        <input id="operation-uid" value="1" type="text" style="visibility: hidden;" />
                     </fieldset>
                 </div>
                 <ul id="operation-list" data-role="listview" data-divider-theme="b" data-inset="true">
@@ -127,7 +133,7 @@
                 <a data-role="button" data-transition="fade" href="#page1" data-icon="back" data-iconpos="left">
                     Back
                 </a>
-                <a target="_blank" data-role="button" data-transition="fade" href="reports" data-icon="grid" data-iconpos="right">
+                <a id="reports-link" target="_blank" data-role="button" data-transition="fade" href="reports" data-icon="grid" data-iconpos="right">
                     Report
                 </a>
             </div>
@@ -176,6 +182,7 @@
 					            Comments
 					        </label>
 					        <textarea id="shift-comments"></textarea>
+					        <input id="shift-uid" value="1" type="text" style="visibility: hidden;" />
 					    </fieldset>
 					</div>
                     <input type="submit" value="Submit" />
@@ -214,6 +221,7 @@
 						            Comments
 						        </label>
 						        <textarea id="session-comments"></textarea>
+      					        <input id="session-uid" value="1" type="text" style="visibility: hidden;" />
 						    </fieldset>
 						</div>
 	                    <input type="submit" value="Submit" />
@@ -251,6 +259,7 @@
 	                            Date
 	                        </label>
 	                        <input id="surgery-date" placeholder="" value="" type="datetime" />
+    					    <input id="surgery-uid" value="1" type="text" style="visibility: hidden;" />	                        
 	                    </fieldset>
 	                </div>
 	                <div data-role="fieldcontain">
@@ -308,7 +317,7 @@
             </div>
         </div>
         <script>
-            //App custom javascript
+        
         </script>
     </body>
 </html>

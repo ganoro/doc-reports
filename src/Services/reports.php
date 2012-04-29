@@ -15,11 +15,11 @@
 function generate_report($req, $res, $isMonthly = true, $timeUnit = null, $uid = 1) {
 	if ($isMonthly) {
 		if (is_null ( $timeUnit ) || ! is_numeric ( $timeUnit ) || $timeUnit > 12 || $timeUnit < 1) {
-			$timeUnit = date ( 'MM' );
+			$timeUnit = date ( 'M' );
 		}
 	} else {
 		if (is_null ( $timeUnit )) {
-			$timeUnit = date ( 'YYYY' );
+			$timeUnit = date ( 'Y' );
 		}
 	}
 	

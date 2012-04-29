@@ -29,7 +29,7 @@ define([ 'jquery', 'underscore', 'backbone', 'text!surgeons/template.html',
 
 		// Re-render the contents of the todo item.
 		render : function() {
-			$(this.el).html(this.template(this.model.toJSON()));
+			$(this.el).html(this.template(this.model.normalize()));
 			var model = this.model;
 			$(this.el).swipeDelete({
 				btnTheme : 'e',

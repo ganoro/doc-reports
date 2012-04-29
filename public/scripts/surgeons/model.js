@@ -28,6 +28,14 @@ define([ 'jquery', 'underscore', 'backbone' ], function($, _, Backbone) {
 				return "Remember to set a title to the surgeon";
 			}
 		},
+		
+		normalize : function() {
+			var n = this.toJSON();
+			if (this.get('id') == undefined) {
+				n.id = this.cid;
+			}
+			return n;
+		},
 
 		clear : function() {
 			this.destroy();

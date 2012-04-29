@@ -1,6 +1,6 @@
 define([ 'jquery', 'underscore', 'backbone', 'operations/collection',
-		'operations/view'], function($, _, Backbone,
-		Operations, OperationsView) {
+		'operations/view' ], function($, _, Backbone, Operations,
+		OperationsView) {
 	var AppOperationView = Backbone.View.extend({
 
 		// Instead of generating a new element, bind to the existing skeleton of
@@ -23,12 +23,17 @@ define([ 'jquery', 'underscore', 'backbone', 'operations/collection',
 			_.bindAll(this, 'addOne', 'addAll', 'render', 'updateBubble');
 
 			this.input = this.$("#operation-input");
+			this.uid = this.$("#operation-uid");
 
 			Operations.bind('add', this.addOne);
 			Operations.bind('reset', this.addAll);
 			Operations.bind('all', this.render);
 
-			Operations.fetch();
+			Operations.fetch({
+				data : $.param({
+					uid : uid
+				})
+			});
 		},
 
 		// Re-rendering the App just means refreshing the statistics -- the rest
@@ -53,7 +58,7 @@ define([ 'jquery', 'underscore', 'backbone', 'operations/collection',
 			}
 			setTimeout(function() {
 				if (window.startBubble == start) {
-					alert (start);
+					alert(start);
 				}
 			}, 3000);
 
@@ -78,6 +83,7 @@ define([ 'jquery', 'underscore', 'backbone', 'operations/collection',
 		newAttributes : function() {
 			return {
 				name : this.input.val(),
+				uid : this.uid.val()
 			};
 		},
 

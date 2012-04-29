@@ -22,12 +22,17 @@ define([ 'jquery', 'underscore', 'backbone', 'surgeons/collection',
 			_.bindAll(this, 'addOne', 'addAll', 'render');
 
 			this.input = this.$("#surgeon-input");
+			this.uid = this.$("#surgeon-uid");
 
 			Surgeons.bind('add', this.addOne);
 			Surgeons.bind('reset', this.addAll);
 			Surgeons.bind('all', this.render);
 
-			Surgeons.fetch();
+			Surgeons.fetch({
+				data : $.param({
+					uid : uid
+				})
+			});
 		},
 
 		// Re-rendering the App just means refreshing the statistics -- the rest
@@ -55,6 +60,7 @@ define([ 'jquery', 'underscore', 'backbone', 'surgeons/collection',
 		newAttributes : function() {
 			var title = this.getTitle(this.$(":checked").val());
 			return {
+				uid : this.uid.val(),
 				name : this.input.val(),
 				title : title
 			};

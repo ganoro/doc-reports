@@ -22,7 +22,11 @@ define([ 'jquery', 'underscore', 'backbone', 'surgeries/collection',
 			Surgeries.bind('reset', this.addAll);
 			Surgeries.bind('all', this.render);
 
-			Surgeries.fetch();
+			Surgeries.fetch({
+				data : $.param({
+					uid : uid
+				})
+			});
 		},
 
 		render : function() {

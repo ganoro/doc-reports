@@ -22,7 +22,11 @@ define([ 'jquery', 'underscore', 'backbone', 'shifts/collection',
 			Shifts.bind('reset', this.addAll);
 			Shifts.bind('all', this.render);
 
-			Shifts.fetch();
+			Shifts.fetch({
+				data : $.param({
+					uid : uid
+				})
+			});
 		},
 
 		render : function() {
