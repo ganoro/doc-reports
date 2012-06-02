@@ -43,7 +43,7 @@ CREATE TABLE  `shifts` (
 DROP TABLE IF EXISTS surgeries;
 CREATE TABLE  `surgeries` (
 	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT  'id',
-	`date` DATETIME NOT NULL COMMENT  'date',
+	`date` DATE NOT NULL COMMENT  'date',
 	`op_type` INT NOT NULL COMMENT  'operation type ',
 	`first` INT NOT NULL COMMENT  'first surgeon',
 	`second` INT NULL COMMENT  'second surgeon',
